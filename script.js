@@ -5,9 +5,14 @@ const list = document.getElementById('list');
 
 list.style.width = '20%';
 
-function books(title, author) {
+function Books(title, author) {
   this.title = title;
   this.author = author;
+}
+
+function setData() {
+  const toObject = JSON.parse(localStorage.getItem('books-list'));
+  return toObject;
 }
 
 let booksArray = setData() ?? [];
@@ -17,13 +22,8 @@ function saveData() {
   localStorage.setItem('books-list', toString);
 }
 
-function setData() {
-  const toObject = JSON.parse(localStorage.getItem('books-list'));
-  return toObject;
-}
-
 function remove(id) {
-  booksArray = booksArray.filter((_book, index) => index != id);
+  booksArray = booksArray.filter((_book, index) => index !== id);
 }
 
 function display() {
@@ -43,7 +43,7 @@ function display() {
     author.textContent = element.author;
     removeButton.textContent = 'Remove';
 
-    removeButton.addEventListener('click', e => {
+    removeButton.addEventListener('click', () => {
       remove(index);
       removeButton.parentElement.remove();
       saveData();
@@ -54,8 +54,8 @@ function display() {
   });
 }
 
-button.addEventListener('click', e => {
-  const book = new books(names.value, pass.value);
+button.addEventListener('click', (e) => {
+  const book = new Books(names.value, pass.value);
   e.preventDefault();
   booksArray.push(book);
   saveData();
