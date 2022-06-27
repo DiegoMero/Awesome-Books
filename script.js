@@ -2,7 +2,6 @@ const names = document.getElementById('exampleInputEmail1');
 const pass = document.getElementById('exampleInputPassword1');
 const button = document.getElementById('button');
 const list = document.getElementById('list');
-const removeButton = document.createElement('li');
 
 function books(title, author) {
   this.title = title;
