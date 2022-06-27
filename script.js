@@ -1,5 +1,5 @@
-const names = document.getElementById("exampleInputEmail1");
-const pass = document.getElementById("exampleInputPassword1");
+const names = document.getElementById("title");
+const pass = document.getElementById("author");
 const button = document.getElementById("button");
 const list = document.getElementById("list");
 
@@ -9,6 +9,17 @@ function books(title, author) {
 }
 
 let booksArray = [];
+
+function saveData() {
+  const toString = JSON.stringify(booksArray);
+  localStorage.setItem('books-list', toString);
+}
+
+function setData(){
+  const toObject = JSON.parse(localStorage.getItem('books-list'));
+  return toObject
+
+}
 
 function remove(id) {
   //  we have index in array, and we can pass it to card
@@ -32,6 +43,7 @@ function display() {
     removeButton.addEventListener("click", (e) => {
       remove(index);
       removeButton.parentElement.remove();
+      saveData();
     });
 
     list.appendChild(bookCard);
@@ -43,6 +55,8 @@ button.addEventListener("click", (e) => {
   const book = new books(names.value, pass.value);
   e.preventDefault();
   booksArray.push(book);
-
+  saveData();
   display();
 });
+
+
