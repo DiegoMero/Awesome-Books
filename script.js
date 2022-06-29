@@ -3,8 +3,6 @@ const author = document.getElementById("author");
 const button = document.getElementById("button");
 const list = document.getElementById('list');
 
-list.style.width = '20%';
-
 class Book {
   constructor(title, author) {
     this.title = title;
