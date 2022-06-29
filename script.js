@@ -1,6 +1,6 @@
-const names = document.getElementById('title');
-const pass = document.getElementById('author');
-const button = document.getElementById('button');
+const title = document.getElementById("title");
+const author = document.getElementById("author");
+const button = document.getElementById("button");
 const list = document.getElementById('list');
 
 list.style.width = '20%';
@@ -12,66 +12,97 @@ class Book {
   }
 }
 
-class BooksList {
-  constructor(collection) {
-    this.collection = collection;
-  }
+// class BooksList {
+//   constructor(collection) {
+//     this.collection = collection;
+//   }
 
-  add(book) {
-    this.collection.push(book);
-  }
+//  static add(book) {
+//     BooksList.collection.push(book);
+//   }
 
-  remove(book) {
-    this.collection = this.collection.filter(item => item !== book);
-  }
-}
+//   remove(book) {
+//     this.collection = this.collection.filter(item => item !== book);
+//   }
+// }
 
-let booksArray = new BooksList(setData() ?? []);
+// let booksArray = new BooksList(setData() ?? []);
 
 class Display {
-  static addBook(book) {
-    const bookCard = document.createElement('ul');
-    const title = document.createElement('li');
-    const author = document.createElement('li');
-    const removeButton = document.createElement('button');
-    const line = document.createElement('hr');
+  static displayList() {
+    const booksArray = Storage.getBooks();
+    booksArray.forEach((book) => Display.addBook(book));
+  }
 
-    bookCard.style.listStyle = 'none';
-    bookCard.style.padding = 0;
+  static addBook(book) {
+    const list = document.getElementById("list");
+    const bookCard = document.createElement("ul");
+    const title = document.createElement("li");
+    const author = document.createElement("li");
+    const removeButton = document.createElement("button");
+    removeButton.classList.add("delete");
+    const line = document.createElement("hr");
+
     title.textContent = book.title;
     author.textContent = book.author;
-    removeButton.textContent = 'Remove';
-
-    removeButton.addEventListener('click', () => {
-      booksArray.remove(book);
-      removeButton.parentElement.remove();
-      saveData();
-    });
+    removeButton.textContent = "Remove";
 
     list.appendChild(bookCard);
     bookCard.append(title, author, removeButton, line);
   }
 
-  static displayList(list) {
-    list.forEach(book => this.addBook(book));
+  static removeBook(eTarget) {
+    if (eTarget.classList.contains("delete")) {
+      eTarget.parentElement.remove();
+    }
+  }
+
+  static clearInputFields() {
+    title.value = "";
+    author.value = "";
   }
 }
 
-function setData() {
-  const toObject = JSON.parse(localStorage.getItem('books-list'));
-  return toObject;
+class Storage {
+  static getBooks() {
+    let booksArray;
+    if (localStorage.getItem("books") === null) {
+      booksArray = [];
+    } else {
+      booksArray = JSON.parse(localStorage.getItem("books"));
+    }
+    return booksArray;
+  }
+
+  static addBookStorage(book) {
+    const booksArray = Storage.getBooks();
+    booksArray.push(book);
+    localStorage.setItem("books", JSON.stringify(booksArray));
+  }
+
+  static removeBookStorage(bookTitle) {
+    let booksArray = Storage.getBooks();
+    booksArray = booksArray.filter((book) => book.title !== bookTitle);
+    localStorage.setItem("books", JSON.stringify(booksArray));
+  }
 }
 
-function saveData() {
-  const toString = JSON.stringify(booksArray);
-  localStorage.setItem('books-list', toString);
-}
 
-button.addEventListener('click', e => {
-  const book = new Book(names.value, pass.value);
+button.addEventListener("click", (e) => {
   e.preventDefault();
-  booksArray.add(book);
-  Display.addBook(book);
+  if (title.value === "" || author.value === "") {
+    alert("Empty fields");
+  } else {
+    const book = new Book(title.value, author.value);
+    Display.addBook(book);
+    Storage.addBookStorage(book);
+    Display.clearInputFields();
+  }
 });
 
-Display.displayList(booksArray.collection);
+document.getElementById("list").addEventListener("click", (e) => {
+  Display.removeBook(e.target);
+  Storage.removeBookStorage(e.target.parentElement.firstChild.textContent);
+});
+
+Display.displayList()
