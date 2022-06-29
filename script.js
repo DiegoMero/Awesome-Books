@@ -34,19 +34,19 @@ class Display {
 
   static addBook(book) {
     const list = document.getElementById("list");
-    const bookCard = document.createElement("ul");
-    const title = document.createElement("li");
-    const author = document.createElement("li");
+    const bookCard = document.createElement("div");
+    const title = document.createElement("h5");
+    const author = document.createElement("h5");
     const removeButton = document.createElement("button");
     removeButton.classList.add("delete");
-    const line = document.createElement("hr");
 
-    title.textContent = book.title;
-    author.textContent = book.author;
+    bookCard.innerHTML = '"' + book.title + '"' + " by " + book.author;
     removeButton.textContent = "Remove";
 
+    bookCard.className = 'book-container';
+
     list.appendChild(bookCard);
-    bookCard.append(title, author, removeButton, line);
+    bookCard.append(title, author, removeButton);
   }
 
   static removeBook(eTarget) {
