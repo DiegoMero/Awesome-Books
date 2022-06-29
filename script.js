@@ -1,7 +1,7 @@
 const title = document.getElementById("title");
 const author = document.getElementById("author");
 const button = document.getElementById("button");
-const list = document.getElementById('list');
+const list = document.getElementById("list");
 
 class Book {
   constructor(title, author) {
@@ -34,19 +34,22 @@ class Display {
 
   static addBook(book) {
     const list = document.getElementById("list");
-    const bookCard = document.createElement("div");
-    const title = document.createElement("h5");
-    const author = document.createElement("h5");
+    const bookCard = document.createElement("ul");
+    const title = document.createElement("li");
+    const author = document.createElement("li");
     const removeButton = document.createElement("button");
     removeButton.classList.add("delete");
 
-    bookCard.innerHTML = '"' + book.title + '"' + " by " + book.author;
+    title.innerHTML = book.title;
+    author.textContent = `by ${book.author}`;
     removeButton.textContent = "Remove";
 
-    bookCard.className = 'book-container';
+    bookCard.className = "book-container";
 
     list.appendChild(bookCard);
     bookCard.append(title, author, removeButton);
+
+    console.log (title)
   }
 
   static removeBook(eTarget) {
@@ -85,7 +88,6 @@ class Storage {
   }
 }
 
-
 button.addEventListener("click", (e) => {
   e.preventDefault();
   if (title.value === "" || author.value === "") {
@@ -103,4 +105,4 @@ document.getElementById("list").addEventListener("click", (e) => {
   Storage.removeBookStorage(e.target.parentElement.firstChild.textContent);
 });
 
-Display.displayList()
+Display.displayList();
