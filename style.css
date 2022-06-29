@@ -7,7 +7,7 @@ body {
 }
 
 #list {
-  border: 5px solid #000000;
+  border: 5px solid #000;
   width: 20%;
 }
 
@@ -22,11 +22,10 @@ body {
 
 #list ul:nth-child(even) {
   background-color: rgb(255, 255, 255);
-
 }
 
 form {
-  padding-top: 1.5rem ;
+  padding-top: 1.5rem;
   width: 25%;
   display: flex;
   flex-direction: column;
@@ -35,7 +34,7 @@ form {
 }
 
 form hr {
-  border-bottom: 2px solid #000000;
+  border-bottom: 2px solid #000;
   width: 30%;
 }
 
@@ -43,7 +42,7 @@ form h1 {
   margin: 0;
 }
 
-.inputs{
+.inputs {
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -52,10 +51,10 @@ form h1 {
 
 form input {
   height: 1.5rem;
-  border: 1px solid #000000;
+  border: 1px solid #000;
 }
 
-form button{
+form button {
   background-color: white;
   box-shadow: 5px 5px 5px black;
   align-self: flex-end;
@@ -65,9 +64,9 @@ form button{
 .book-container {
   display: flex;
   align-items: center;
-padding: 10px;
+  padding: 10px;
   margin: 0;
-
+  gap: 8px;
 }
 
 .delete {
