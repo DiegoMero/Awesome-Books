@@ -29,7 +29,7 @@ class Storage {
 
   static removeBookStorage(bookTitle) {
     let booksArray = Storage.getBooks();
-    booksArray = booksArray.filter(book => book.title !== bookTitle);
+    booksArray = booksArray.filter((book) => book.title !== bookTitle);
     localStorage.setItem('books', JSON.stringify(booksArray));
   }
 }
@@ -37,7 +37,7 @@ class Storage {
 class Display {
   static displayList() {
     const booksArray = Storage.getBooks();
-    booksArray.forEach(book => Display.addBook(book));
+    booksArray.forEach((book) => Display.addBook(book));
   }
 
   static addBook(book) {
@@ -70,7 +70,7 @@ class Display {
   }
 }
 
-button.addEventListener('click', e => {
+button.addEventListener('click', (e) => {
   e.preventDefault();
   const book = new Book(title.value, author.value);
   Display.addBook(book);
@@ -78,7 +78,7 @@ button.addEventListener('click', e => {
   Display.clearInputFields();
 });
 
-document.getElementById('list').addEventListener('click', e => {
+document.getElementById('list').addEventListener('click', (e) => {
   Display.removeBook(e.target);
   Storage.removeBookStorage(e.target.parentElement.firstChild.textContent);
 });
