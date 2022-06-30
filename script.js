@@ -52,8 +52,6 @@ class Display {
     author.textContent = `by ${book.author}`;
     removeButton.textContent = 'Remove';
 
-    bookCard.className = 'book-container';
-
     list.appendChild(bookCard);
     bookCard.append(title, author, removeButton);
   }
@@ -84,3 +82,28 @@ document.getElementById('list').addEventListener('click', (e) => {
 });
 
 Display.displayList();
+
+// full page events
+
+const addNew = document.querySelector('.add-new');
+const form = document.querySelector('.form');
+const main = document.querySelector('.main');
+const showMain = document.querySelector('.show-main');
+
+let date = document.querySelector('.date');
+
+addNew.addEventListener('click', (e) => {
+  if(form.classList.contains('active')){}
+  else{
+  form.classList.toggle('active');
+  main.classList.toggle('active');}
+});
+
+showMain.addEventListener('click', (e) => {
+  if(main.classList.contains('active')){
+  main.classList.toggle('active');
+  form.classList.toggle('active');
+  }
+});
+
+date.innerHTML = Date();
