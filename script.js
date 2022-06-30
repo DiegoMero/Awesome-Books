@@ -89,20 +89,32 @@ const addNew = document.querySelector('.add-new');
 const form = document.querySelector('.form');
 const main = document.querySelector('.main');
 const showMain = document.querySelector('.show-main');
+const showContact = document.querySelector('.show-contact');
+const contact = document.querySelector('.contact-section');
 
 let date = document.querySelector('.date');
 
 addNew.addEventListener('click', (e) => {
-  if(form.classList.contains('active')){}
-  else{
-  form.classList.toggle('active');
-  main.classList.toggle('active');}
+  if(!form.classList.contains('active')){  
+    contact.classList.remove('active');
+    main.classList.add('active');
+    form.classList.add('active');
+  }
 });
 
 showMain.addEventListener('click', (e) => {
   if(main.classList.contains('active')){
-  main.classList.toggle('active');
-  form.classList.toggle('active');
+    contact.classList.remove('active');
+    form.classList.remove('active');
+    main.classList.remove('active');
+  }
+});
+
+showContact.addEventListener('click', (e) => {
+  if(!contact.classList.contains('active')){
+    form.classList.remove('active');
+    main.classList.add('active');
+    contact.classList.add('active');
   }
 });
 

@@ -1,7 +1,11 @@
 body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   height: 90vh;
   margin: 0;
   padding: 1rem 8rem;
+
 }
 
 nav {
@@ -49,7 +53,7 @@ nav ul li:nth-child(2) {
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  height: 100%;
+  height: auto;
 }
 
 .main h1 {
@@ -147,7 +151,7 @@ form button {
   font-size: 1.5rem;
 }
 
-.footer {
+footer {
   display: flex;
   width: 100%;
   justify-content: space-around;
@@ -155,9 +159,10 @@ form button {
   /* padding: 1rem 10rem; */
   border: 5px solid #000;
   align-items: center;
+  margin-top: auto;
 }
 
-.contact-section {
+.contact-section.active {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -173,4 +178,8 @@ form button {
 
 .contact-section ul {
   font-size: 1.5rem;
+}
+
+.contact-section {
+  display: none;
 }
